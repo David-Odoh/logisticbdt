@@ -1,0 +1,11 @@
+{
+    "/api": {
+        "target": "https://logistics-bdt-api.herokuapp.com",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api": "https://logistics-bdt-api.herokuapp.com/api"
+        }
+    }
+}

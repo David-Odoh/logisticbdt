@@ -1,0 +1,8 @@
+<div class="store-wrap" [ngClass]="[backgroundColor]" (window:resize)="onResize($event)">
+    <div class="d-lg-flex">
+        <div class="sidebar flex-lg-column">
+            <sidebar></sidebar>
+        </div>
+        <router-outlet></router-outlet>
+    </div>
+</div>

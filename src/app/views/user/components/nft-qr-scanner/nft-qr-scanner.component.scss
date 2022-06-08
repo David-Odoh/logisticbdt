@@ -1,0 +1,34 @@
+:host zxing-scanner ::ng-deep video {
+    height: calc(100vh - 54px) !important;
+    object-fit: contain;
+}
+
+:host zxing-scanner::ng-deep {
+    z-index: 1
+} 
+
+.result-panel {
+    background: #ffffffc2;
+    padding: 30px 40px;
+    border-radius: 20px;
+    min-width: 300px;
+    max-width: 320px;
+    margin-bottom: 20px;
+
+    span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.action-buttons {
+    gap: 10px;
+    button {
+        color: white;
+        background: green;
+        border: none;
+        padding: 10px;
+        border-radius: 50px;
+        min-width: 100px;
+    }
+} 

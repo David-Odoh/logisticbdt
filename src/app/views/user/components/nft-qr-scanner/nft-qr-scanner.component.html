@@ -1,0 +1,11 @@
+<div style="overflow: hidden; height: calc(100vh - 54px);" class="jx-p-relative jx-d-flex justify-content-center">
+    <zxing-scanner #scanner [formats]="allowedFormats" (camerasFound)="camerasFound($event)" (scanSuccess)="scannedResult($event)"></zxing-scanner>
+
+    <section class="floating-panel jx-p-absolute jx-d-grid justify-content-center" style="bottom: 30%; z-index: 10000; left:0; right:0;" *ngIf="qrResultString">
+        <div class="result-panel"> <span class="jx-d-block jx-of-hidden">{{qrResultString}}</span></div>
+        <div class="action-buttons jx-d-flex justify-content-center">
+            <button class="theme-color-bg" (click)="clearResult()">Clear</button>
+            <button (click)="processWithMintFlow()">Proceed</button>
+        </div>
+    </section>
+</div>

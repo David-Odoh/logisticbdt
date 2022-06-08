@@ -1,0 +1,65 @@
+.nfts-page-wrap {
+    margin-left: 77px;
+    width: calc(100vw - 77px);
+}
+
+.nfts-container {
+    border-right: 1px solid #d6e0ea;
+}
+
+.nfts-wrapper {
+    overflow: hidden;
+    height: 100vh;
+    
+}
+
+.nfts-list {
+    overflow-y: auto;
+    height: 75% !important;
+}
+
+.nft-leftsidebar {
+    height: 100vh;
+    // background-color: #f5f7fb;
+    // background-image: linear-gradient(-29deg, #E63046, #FD0B39);
+}
+
+.nft-viewer {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(15, 34, 58, .12);
+    transition: all .4s;
+}
+
+@media (min-width: 992px) {
+    .nft-leftsidebar {
+        min-width: 380px;
+        max-width: 380px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .nfts-container {
+        border-right: none;
+    }
+    .nfts-wrapper, .nft-leftsidebar {
+        width: 100vw;
+    }
+    .nfts-page-wrap {
+        margin-left: 0;
+        width: calc(100vw);
+    }
+    .nft-viewer {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        visibility: hidden;
+        transform: translateX(100%);
+        z-index: 99;
+        &.nft-viewer-show {
+            visibility: visible;
+            transform: translateX(0);
+        }
+    }
+}

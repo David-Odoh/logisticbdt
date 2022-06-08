@@ -3,8 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  appName: 'logistic_bdt_web',
+  developmentKeyring: true,
+  production: false,
+  providerSocket: 'wss://gladios.aresprotocol.io',
+  rpc: {},
+  secretKey: '0123456789123456',
+  secretIV: '0123456789123456',
 };
+
+// providerSocket: 'ws://127.0.0.1:9944',
 
 /*
  * For easier debugging in development mode, you can import the following file

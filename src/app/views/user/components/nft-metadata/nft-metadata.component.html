@@ -1,0 +1,35 @@
+<div class="jx-m-1 jx-d-block metadata-wrapper" style="overflow-y: auto; ">
+    <!-- <div class="title w-per-100 jx-p-05 jx-mb-1 cubed-logo">
+        <h2 class="jx-fs-24 jx-mb-0" (click)="submitAll()">Enter NFT Data</h2>
+    </div> -->
+    <div class="-tab-wrapper">
+        <div class="-tab-nav">
+            <ul class="-tab-group jx-d-flex jx-gap-2 justify-content-between align-items-center jx-fs-14 jx-mb-0">
+                <li class="-tab-trigger" [class.active]="viewMode == 'tab1'" rel="tab1" (click)="viewMode ='tab1';">File Upload
+                </li>
+                <li class="-tab-trigger" [class.active]="viewMode == 'tab2'" rel="tab2" (click)="viewMode ='tab2'">Metadata
+                </li>
+            </ul>
+        </div>
+        <div class="-tab-body-group">
+            <div id="tab1" class="-tab-body" [class.jx-d-block]="viewMode == 'tab1'">
+                <div class="tab-wrapper">
+                    <!-- Busy -->
+                    <span class="form-overlay" *ngIf="busy"><i class="la la-refresh icon-spin cubed-logo"></i></span>
+                    <dynamic-form [float]="float_style" [config]="config1" #form1="dynamicForm" (submit)="submit1($event)"></dynamic-form>
+                </div>
+            </div>
+            <div id="tab2" class="-tab-body" [class.jx-d-block]="viewMode == 'tab2'">
+                <div class="tab-wrapper jx-p-relative">
+                    <dynamic-form [float]="float_style" [config]="config2" #form2="dynamicForm" (submit)="submit2($event)"></dynamic-form>
+                    <div class="preview-attachment jx-p-absolute" *ngIf="uploadedImageUrl">
+                        <span class="jx-d-block">Attachment:</span>
+                        <span class="jx-d-block jx-of-hidden" style="max-width: 25vw; max-height: 78vh;"><img [src]="uploadedImageUrl" alt=""></span>
+                        <span class="delete-image" (click)="deleteImage()">Delete</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</div>

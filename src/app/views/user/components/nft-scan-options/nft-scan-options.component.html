@@ -1,0 +1,20 @@
+<div class="nfts-container">
+    <div class="nfts-wrapper h-100vh">
+        <div class="nfts-header">
+            <div class="nfts-title jx-fs-26 jx-fw-normal jx-px-1 jx-py-1 jx-d-grid" style="grid-template-columns: 1fr 2fr;">
+                <i class="ri-arrow-left-line" (click)="goBack()"></i>
+                <span class="jx-fs-20">{{title}}s</span>
+            </div>
+          
+        </div>
+
+        <div class="nfts-list h-per-100 jx-p-2">
+           <span class="jx-t-uppercase jx-my-2 jx-d-block jx-fs-15">Select scan option</span>
+           <div class="button-list">
+               <button class="jx-t-uppercase" (click)="requestToOpenNFTCreate('Barcode')">Barcode</button>
+               <button class="jx-t-uppercase" (click)="requestToOpenNFTCreate('QR Code')">QR Code</button>
+               <button class="jx-t-uppercase" (click)="requestToOpenNFTCreate('NFC')">NFC</button>
+           </div>
+        </div>
+    </div>
+</div>

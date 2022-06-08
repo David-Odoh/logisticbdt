@@ -1,0 +1,21 @@
+<div class="thread-container">
+    <div class="thread-wrap jx-p-relative">
+        <div class="header jx-d-flex justify-content-between align-items-center">
+            <div class="justify-left jx-d-flex h-per-100">
+                <div class="back jx-fs-18 align-items-center jx-px-1 jx-d-flex align-item-center jx-fs-26" (click)="requestMainAreaClose()">
+                    <i class="ri-arrow-left-s-line"></i>
+                </div>
+                <div class="ticketId jx-fs-18 jx-ml-1 jx-d-flex align-items-center jx-t-capitalize">{{pageInView}}</div>
+            </div>
+            <!-- <div class="justify-right jx-d-flex jx-fs-22 h-per-100 align-items-center jx-px-1">
+                <span class="actionIcons"><i class="ri-reply-all-fill"></i></span>
+                <span class="actionIcons"><i class="ri-user-6-fill"></i></span>
+                <span class="actionIcons"><i class="ri-flag-fill"></i></span>
+                <span class="actionIcons"><i class="ri-more-fill jx-fs-26"></i></span>
+            </div> -->
+        </div>
+        <div class="thread-content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
