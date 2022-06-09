@@ -10,6 +10,8 @@ import { NodeState } from '../components/contract/node-state';
 import { environment } from 'src/environments/environment';
 import jsonrpc from '@polkadot/types/interfaces/jsonrpc';
 import { keyring } from '@polkadot/ui-keyring';
+import { u8aToHex } from '@polkadot/util';
+import { decodeAddress } from '@polkadot/util-crypto';
 
 const NO_ACCOUNT_SELECTED_MESSAGE = 'No account is selected.';
 const NOT_CONNECTED_MESSAGE = 'App is not connected to node.';
@@ -27,6 +29,8 @@ export class NodeService {
 
   private selectedAccount: Account | null = null;
 
+  private selectedPublicKey: string | null = null;
+
   public get nodeState$(): Observable<NodeState> {
       if (!this._nodeState$) {
           return throwError(() => NOT_CONNECTED_MESSAGE);
@@ -37,6 +41,10 @@ export class NodeService {
 
   public currentAccount() {
       return this.selectedAccount;
+  }
+
+  public currentPK() {
+      return this.selectedPublicKey;
   }
 
   public connectToNode(): Observable<NodeState> {
@@ -126,7 +134,16 @@ export class NodeService {
 
   public selectAccount(account: Account) {
       this.selectedAccount = account;
+      
+      this.extractPK(account);
       this._accountHashAvailable$.next(true);
+  }
+
+  public extractPK(account: Account) {
+    const publicKey = decodeAddress(account.address);
+    const hexPublicKey = u8aToHex(publicKey);
+    console.log('hexPublicKey' , hexPublicKey);
+    this.selectedPublicKey = hexPublicKey;
   }
 
   public transfer(amount: number, toAddress: string): Observable<string> {

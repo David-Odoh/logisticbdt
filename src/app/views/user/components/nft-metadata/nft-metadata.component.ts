@@ -35,6 +35,7 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
 
   busy = false;
   float_style = true;
+  accountPK: string | null = null; 
 
   config1: FieldConfig[] = [
     {
@@ -116,6 +117,12 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
     // this.subscriptions.add(
     //   this.$nft.$qrCode.subscribe(id => {if (id) this.PID = id})
     // );
+    this.subscriptions.add(
+      this.$ns._accountHashAvailable$.subscribe(v => {
+        let pk = this.$ns.currentPK();
+        if (pk) this.accountPK = pk;
+      })
+    )
   }
 
   ngOnInit(): void {
@@ -220,7 +227,8 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
 
   async submit2(data: any) {
     if (this.PID) {
-      data['pid'] = this.PID
+      data['pid'] = this.PID;
+      data['public_key'] = this.accountPK;
       console.log('raw', data);
   
       if (this.uploadedImageUrl) {
