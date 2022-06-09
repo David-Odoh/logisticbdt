@@ -2,7 +2,7 @@ import { AfterContentInit, AfterViewInit, Component, OnInit, ViewChild } from '@
 import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import Keyring from '@polkadot/keyring';
-import { stringToU8a, u8aToHex } from '@polkadot/util';
+import { stringToU8a, u8aToHex, u8aToString } from '@polkadot/util';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Dictionary } from 'src/app/shared/models/dictionary';
@@ -148,27 +148,34 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
         const newPair = keyring.addFromUri(`//${userAccount?.name}`);
   
         // Stringify metadata
-        let stringMetadata = metadata.toString();
+        let stringMetadata = JSON.stringify(metadata);
   
         // Hash metadata
-        let hashedMetadata = this.$security.encryptUsingAES256(stringMetadata).toString();
+        let encodedMetadata = this.$security.encryptUsingAES256(stringMetadata).toString();
   
-        console.log('hashedMetadata', hashedMetadata.toString())
+        console.log('encodedMetadata', encodedMetadata.toString())
   
         // Stringify metadata
-        const message = await stringToU8a(hashedMetadata);
-        console.log('message', message)
+        // const message = await stringToU8a(encodedMetadata);
+        const message = encodedMetadata;
         const signature = await newPair.sign(message);
+        
+        const newPairPK =  newPair.publicKey;
+        const newPairAddress =  newPair.address;
+        const hexSignature = u8aToHex(signature);
+        
+        console.log('message', message)
         console.log('signature', signature)
-        console.log(' newPair.publicKey',  newPair.publicKey)
+        console.log(' newPair.publicKey',  newPair.address)
+        console.log('newPairPK', newPairPK.toString())
+        console.log('hexSignature', hexSignature.toString())
 
-        let newPairPK =  newPair.publicKey
         const isValid = await newPair.verify(message, signature, newPairPK);
   
         // output the result
         console.log(`New: ${await u8aToHex(signature)} is ${isValid ? 'valid' : 'invalid'}`);
 
-        if (isValid) return {message, signature, newPairPK}
+        if (isValid) return {message, hexSignature, newPairAddress}
       }
 
       return null

@@ -28,7 +28,7 @@ export class NftService {
 
   // Create NFTs
   saveNFT(data: any): Observable<any> {
-    return this.http.post(`${this.BASE_URL}/v1/ipfs/save-rfid`, data)
+    return this.http.post(`${this.BASE_URL}/v1/ipfs/save-item`, data)
       .pipe(map(res => { return res }),
         catchError(this.handleError)
       );

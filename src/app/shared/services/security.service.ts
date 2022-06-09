@@ -16,11 +16,9 @@ export class SecurityService {
 
     let encrypted = CryptoJS.AES.encrypt(
       JSON.stringify(rawData), _key, {
-      keySize: 16,
       iv: _iv,
-      mode: CryptoJS.mode.ECB,
-      padding: CryptoJS.pad.Pkcs7
-    });
+      mode: CryptoJS.mode.CBC,
+    }); 
     return encrypted;
   }
 
@@ -30,11 +28,37 @@ export class SecurityService {
 
     let decrypted = CryptoJS.AES.decrypt(
       encrypted, _key, {
-      keySize: 16,
       iv: _iv,
-      mode: CryptoJS.mode.ECB,
-      padding: CryptoJS.pad.Pkcs7
+      mode: CryptoJS.mode.CBC,
     }).toString(CryptoJS.enc.Utf8);
     return JSON.parse(decrypted);
   }
+
+  // encryptUsingAES256(rawData: string) {
+  //   let _key = CryptoJS.enc.Utf8.parse(environment.secretKey);
+  //   let _iv = CryptoJS.enc.Utf8.parse(environment.secretIV);
+
+  //   let encrypted = CryptoJS.AES.encrypt(
+  //     JSON.stringify(rawData), _key, {
+  //     keySize: 16,
+  //     iv: _iv,
+  //     mode: CryptoJS.mode.ECB,
+  //     padding: CryptoJS.pad.Pkcs7
+  //   });
+  //   return encrypted;
+  // }
+
+  // decryptUsingAES256(encrypted: string) {
+  //   let _key = CryptoJS.enc.Utf8.parse(environment.secretKey);
+  //   let _iv = CryptoJS.enc.Utf8.parse(environment.secretIV);
+
+  //   let decrypted = CryptoJS.AES.decrypt(
+  //     encrypted, _key, {
+  //     keySize: 16,
+  //     iv: _iv,
+  //     mode: CryptoJS.mode.ECB,
+  //     padding: CryptoJS.pad.Pkcs7
+  //   }).toString(CryptoJS.enc.Utf8);
+  //   return JSON.parse(decrypted);
+  // }
 }
