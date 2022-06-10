@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.config.json --port 42331 -o",
+    "start-dev": "ng serve --proxy-config proxy.config.json --port 42331 -o",
+    "start": "node server.js",
     "watch": "ng build --watch --configuration development",
     "build": "ng build",
     "generate": "npm run generate:defs && npm run generate:meta",
