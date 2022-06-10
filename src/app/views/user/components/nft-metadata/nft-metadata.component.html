@@ -24,7 +24,8 @@
                     <dynamic-form [float]="float_style" [config]="config2" #form2="dynamicForm" (submit)="submit2($event)"></dynamic-form>
                     <div class="preview-attachment jx-p-absolute" *ngIf="uploadedImageUrl">
                         <span class="jx-d-block">Attachment:</span>
-                        <span class="jx-d-block jx-of-hidden" style="max-width: 25vw; max-height: 78vh;"><img [src]="uploadedImageUrl" alt=""></span>
+                        <!-- <span class="jx-d-block jx-of-hidden" style="max-width: 25vw; max-height: 78vh;"><img [src]="uploadedImageUrl" alt=""></span> -->
+                        <span class="jx-d-block jx-of-hidden" style="max-width: 25vw; max-height: 78vh;"><span [ngStyle]="{'background-image': 'url(' + uploadedImageUrl + ')'}" ></span></span>
                         <span class="delete-image" (click)="deleteImage()">Delete</span>
                     </div>
                 </div>
