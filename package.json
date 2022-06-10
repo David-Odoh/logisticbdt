@@ -9,7 +9,8 @@
     "generate": "npm run generate:defs && npm run generate:meta",
     "generate:defs": "ts-node --skip-project node_modules/.bin/polkadot-types-from-defs --package sample-polkadotjs-typegen/interfaces --input ./src/edgeware/interfaces --endpoint ./edgeware.json",
     "generate:meta": "ts-node --skip-project node_modules/.bin/polkadot-types-from-chain --package sample-polkadotjs-typegen/interfaces --endpoint ./edgeware.json --output ./src/edgeware/interfaces",
-    "lint": "tsc --noEmit --pretty"
+    "lint": "tsc --noEmit --pretty",
+    "heroku-postbuild": "ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -73,5 +74,9 @@
     "karma-jasmine-html-reporter": "~1.7.0",
     "ts-node": "^10.8.0",
     "typescript": "~4.5.2"
+  },
+  "engines": {
+    "node": "12.18.2",
+    "npm": "6.14.5"
   }
 }
