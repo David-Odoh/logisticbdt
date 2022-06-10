@@ -11,7 +11,7 @@
     "generate:defs": "ts-node --skip-project node_modules/.bin/polkadot-types-from-defs --package sample-polkadotjs-typegen/interfaces --input ./src/edgeware/interfaces --endpoint ./edgeware.json",
     "generate:meta": "ts-node --skip-project node_modules/.bin/polkadot-types-from-chain --package sample-polkadotjs-typegen/interfaces --endpoint ./edgeware.json --output ./src/edgeware/interfaces",
     "lint": "tsc --noEmit --pretty",
-    "heroku-postbuild": "ng build --prod"
+    "heroku-postbuild": "ng build --configuration=production"
   },
   "private": true,
   "dependencies": {
