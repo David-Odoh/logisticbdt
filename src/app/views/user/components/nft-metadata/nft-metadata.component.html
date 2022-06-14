@@ -12,10 +12,10 @@
             </ul>
         </div>
         <div class="-tab-body-group">
+            <!-- Busy -->
+            <span class="form-overlay" *ngIf="busy"><i class="la la-refresh icon-spin cubed-logo"></i></span>
             <div id="tab1" class="-tab-body" [class.jx-d-block]="viewMode == 'tab1'">
                 <div class="tab-wrapper">
-                    <!-- Busy -->
-                    <span class="form-overlay" *ngIf="busy"><i class="la la-refresh icon-spin cubed-logo"></i></span>
                     <dynamic-form [float]="float_style" [config]="config1" #form1="dynamicForm" (submit)="submit1($event)"></dynamic-form>
                 </div>
             </div>

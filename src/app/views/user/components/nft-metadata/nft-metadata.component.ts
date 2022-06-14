@@ -131,7 +131,6 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-   
   }
 
   ngOnDestroy() {
@@ -234,8 +233,17 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
       if (this.uploadedImageUrl) {
         data.product_image = this.uploadedImageUrl;
         console.log(data);
-  
+
         let signedData = await this.signMetadata(data);
+        // if (!data['product_label']) {
+        //   this.toastr.error('Product Label can\'t be empty', 'Required Field');
+        // }
+        // if (!data['product_name']) {
+        //   this.toastr.error('Product Name can\'t be empty', 'Required Field');
+        // }
+        // if (!data['product_brand']) {
+        //   this.toastr.error('Product Brand can\'t be empty', 'Required Field');
+        // }
           if (signedData != null) {
 
             console.log('Final Result: ', signedData)
@@ -273,6 +281,26 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
 
   deleteImage() {
     console.log('Deleting image')
+  }
+
+  resetForm () {
+    setTimeout(() => {
+      let previousValid = this.form2.valid;
+      this.form2.changes.subscribe(() => {
+        if (this.form2.valid !== previousValid) {
+          previousValid = this.form2.valid;
+          this.form2.setDisabled('submit', !previousValid);
+        }
+      });
+
+      this.form2.setDisabled('submit', true);
+      this.form2.setValue('product_label', 'david');
+      this.form2.setValue('product_name', '');
+      this.form2.setValue('product_color', '');
+      this.form2.setValue('product_brand', '');
+      this.form2.setValue('description', '');
+
+    });
   }
 }
 
