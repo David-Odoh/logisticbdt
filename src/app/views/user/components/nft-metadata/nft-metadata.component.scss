@@ -110,6 +110,13 @@ li.-tab-trigger.active {
 
 }
 
+@media (max-width: 991px) {
+    .-tab-wrapper {
+        margin-bottom: 150px;
+    }
+
+}
+
 @media (max-width: 620px) {
     li.-tab-trigger {
         padding: 10px 15px;
