@@ -1,7 +1,7 @@
 // Available Dictionary Enum
 export class Dictionary {
     terms = [
-        { id: 1, name: 'Mint NFT', plural: 'Mint NFTs', alias: 'mint_nft', ref: 'Product', },
+        { id: 1, name: 'Mint LuxuryNFT', plural: 'Mint LuxuryNFTs', alias: 'mint_nft', ref: 'Product', },
         { id: 2, name: 'Part Request', plural: 'Part Requests', alias: 'part_request', ref: 'Resource Request', },
         { id: 3, name: 'ATM Terminal', plural: 'ATM Terminals', alias: 'atm_terminal', ref: 'Help Topic' },
         { id: 4, name: 'Routine Maintenance', plural: 'Routine Maintenance', alias: 'routine_maintenance', ref: 'Schedule' },

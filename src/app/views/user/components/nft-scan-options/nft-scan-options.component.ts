@@ -18,12 +18,21 @@ export class NftScanOptionsComponent implements OnInit {
   ngOnInit(): void { }
 
   requestToOpenNFTCreate(option: string) {
-    this.router.navigate(["/user/nft-create/qr"]);
 
     // Display Info in Main Area
     this.$ui.updateNFTView(`Scan ${option}`);
-    this.$ui.updateSecondaryRoute('qr');
     this.$ui.openInMainArea(option);
+    
+    if (option === 'NFC') {
+      this.router.navigate(["/user/nft-create/nfc"]);
+      this.$ui.updateSecondaryRoute('nfc');
+    } 
+    
+    else {
+      this.router.navigate(["/user/nft-create/qr"]);
+      this.$ui.updateSecondaryRoute('qr');
+    }
+
   }
 
   goBack() {

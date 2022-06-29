@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccountSettingsComponent } from './account-pages/account-settings/account-settings.component';
+import { BrandRegisterComponent } from './brand-pages/brand-register/brand-register.component';
 import { NftFlowHolderComponent } from './components/nft-flow-holder/nft-flow-holder.component';
 import { NftMetadataComponent } from './components/nft-metadata/nft-metadata.component';
+import { NftNfcReaderComponent } from './components/nft-nfc-reader/nft-nfc-reader.component';
 import { NftQrScannerComponent } from './components/nft-qr-scanner/nft-qr-scanner.component';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { StoreFrontComponent } from './market-pages/store-front/store-front.component';
@@ -23,8 +25,18 @@ const routes: Routes = [
       { path: 'fh', component: NftFlowHolderComponent },
       { path: 'metadata', component: NftMetadataComponent },
       { path: 'qr', component: NftQrScannerComponent },
+      { path: 'nfc', component: NftNfcReaderComponent },
       { path: '**', redirectTo: 'fh', pathMatch: "full" },
       ]
+    }, 
+  {
+      path: "register-brand",
+      component: BrandRegisterComponent,
+      // children: [
+      //   { path: '', redirectTo: 'fh', pathMatch: "full" },
+      //   { path: 'fh', component: NftFlowHolderComponent },
+      //   { path: '**', redirectTo: 'fh', pathMatch: "full" },
+      // ]
     }, 
     { path: 'home', component: DashboardPageComponent}, 
     { path: 'market', component: StoreFrontComponent}, 

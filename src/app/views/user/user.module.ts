@@ -16,6 +16,10 @@ import { DynamicFormModule } from 'src/app/shared/widgets/dynamic-form/dynamic-f
 import { StoreFrontComponent } from './market-pages/store-front/store-front.component';
 import { SearchHomeComponent } from './search-pages/search-home/search-home.component';
 import { AccountSettingsComponent } from './account-pages/account-settings/account-settings.component';
+import { BrandRegisterComponent } from './brand-pages/brand-register/brand-register.component';
+import { BrandMetadataComponent } from './components/brand-metadata/brand-metadata.component';
+import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
+import { NftNfcReaderComponent } from './components/nft-nfc-reader/nft-nfc-reader.component';
 
 
 @NgModule({
@@ -32,6 +36,10 @@ import { AccountSettingsComponent } from './account-pages/account-settings/accou
     StoreFrontComponent,
     SearchHomeComponent,
     AccountSettingsComponent,
+    BrandRegisterComponent,
+    BrandMetadataComponent,
+    ComingSoonComponent,
+    NftNfcReaderComponent,
   ],
   imports: [
     CommonModule,

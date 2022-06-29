@@ -1,0 +1,46 @@
+
+
+.menu-title {
+    margin-top: 30px;
+    margin-left: 10vw;
+    font-size: 18px;
+    font-weight: bold;
+    color: #d72f3f;
+    letter-spacing: 2px;
+}
+
+:host ::ng-deep .jexta-select.open .jexta-options {
+    /* box-shadow: var(--dropdown-shadow-color) !important; */
+}
+
+:host ::ng-deep .dynamic-field {
+    grid-template-columns: 1fr !important;
+    grid-row-gap: 0px !important;
+}
+
+:host ::ng-deep .dynamic-field label {
+    text-align: left !important;
+}
+
+.row-one {
+    margin-left: 77px;
+    margin-right: 77px;
+    margin-top: 30px;
+    border: 1px solid #d6e0ea;
+    box-shadow: 0 6px 18px 0 rgb(0 35 90 / 8%), 0 0 2px 0 rgb(0 35 90 / 6%);
+    padding: 10px 0;
+}
+
+
+@media (max-width: 680px) {
+    .menu-title {
+        font-size: 16px;
+    }
+    .row-one {
+            margin-top: 10px;
+            margin-left: 0;
+            margin-right: 0;
+            width: 100vw;
+            padding: 10px;
+        }
+}

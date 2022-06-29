@@ -41,3 +41,9 @@ button:disabled {
 .dynamic-field {
     max-width: 500px;
 }
+
+@media (max-width: 991px) {
+    .row-container {
+        margin-bottom: 80px;
+    }
+}
