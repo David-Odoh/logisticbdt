@@ -88,6 +88,9 @@ span.-text {
 }
 
 @media(max-width: 480px) {
+    .desktop-only {
+        display: none;
+    }
     span.-upload-btn {
         max-width: 200px;
     }

@@ -1,21 +1,24 @@
 <div class="jx-m-1 jx-d-block metadata-wrapper" style="overflow-y: auto; ">
-    <!-- <div class="title w-per-100 jx-p-05 jx-mb-1 cubed-logo">
-        <h2 class="jx-fs-24 jx-mb-0" (click)="submitAll()">Enter NFT Data</h2>
-    </div> -->
+  
     <div class="-tab-wrapper">
         <div class="-tab-nav">
-            <ul class="-tab-group jx-d-flex jx-gap-2 justify-content-between align-items-center jx-fs-14 jx-mb-0">
-                <li class="-tab-trigger" [class.active]="viewMode == 'tab1'" rel="tab1" (click)="viewMode ='tab1';">File Upload
-                </li>
-                <li class="-tab-trigger" [class.active]="viewMode == 'tab2'" rel="tab2" (click)="viewMode ='tab2'">Metadata
-                </li>
-            </ul>
+            <ng-container *ngIf="viewMode == 'tab1' || viewMode == 'tab2'">
+                <ul class="-tab-group jx-d-flex jx-gap-2 justify-content-between align-items-center jx-fs-14 jx-mb-0">
+                    <li class="-tab-trigger" [class.active]="viewMode == 'tab1'" rel="tab1" (click)="viewMode ='tab1';">File Upload
+                    </li>
+                    <li class="-tab-trigger" [class.active]="viewMode == 'tab2'" rel="tab2" (click)="viewMode ='tab2'">Metadata
+                    </li>
+                </ul>
+            </ng-container>
         </div>
         <div class="-tab-body-group">
             <!-- Busy -->
             <span class="form-overlay" *ngIf="busy"><i class="la la-refresh icon-spin cubed-logo"></i></span>
             <div id="tab1" class="-tab-body" [class.jx-d-block]="viewMode == 'tab1'">
-                <div class="tab-wrapper">
+                <div class="tab-wrapper jx-p-relative">
+                    <span class="camera-launcher bounce jx-p-absolute">
+                        <i class="remix ri-camera-3-line jx-fs-22"></i>
+                    </span>
                     <dynamic-form [float]="float_style" [config]="config1" #form1="dynamicForm" (submit)="submit1($event)"></dynamic-form>
                 </div>
             </div>
@@ -30,7 +33,73 @@
                     </div>
                 </div>
             </div>
+            <div id="tab3" class="-tab-body" [class.jx-d-block]="viewMode == 'tab3'">
+                <div class="tab-wrapper jx-p-relative  jx-py-1 jx-px-2">
+                    <h3 class="menu-title">Preview</h3>
+
+                    <div class="sidebar-thumbnail animated fadeInUp jx-d-flex align-items-center justify-content-center">
+                        <img id="prodImage" [src]="preparedData?.product_image" class="product-image" 
+                          onerror="this.src='assets/images/users/11-255.jpg'" alt="">
+                        <img class="float-it" src="assets/images/icons/camera.png" alt="">
+                      </div>
+
+                    <div class="user-data jx-py-2">
+                        <div class="data-row">
+                            <span class="key">Product ID (PID):</span>
+                            <span class="value">{{preparedData?.pid}}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="key">Product Label:</span>
+                            <span class="value">{{preparedData?.product_label}}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="key">Product Name:</span>
+                            <span class="value">{{preparedData?.product_name}}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="key">Product Color:</span>
+                            <span class="value">{{preparedData?.product_color}}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="key">Product Brand:</span>
+                            <span class="value">{{preparedData?.product_brand}}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="key">Product Description:</span>
+                            <span class="value">{{preparedData?.description}}</span>
+                        </div>
+                    </div>
+
+                    <div class="prev-sign-btns jx-d-flex justify-content-between">
+                        <button class="prev" (click)="viewMode = 'tab2'"> Previous </button>
+                        <button class="sign" (click)="submit3()"> Sign & Send </button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="tab4" class="-tab-body" [class.jx-d-block]="viewMode == 'tab4'">
+                <div class="tab-wrapper jx-py-1 jx-px-2 jx-d-flex justify-content-center align-items-center">
+                        <div class="prev-sign-btns jx-d-grid jx-py-4">
+                            <span class="jx-fs-24 jx-py-1" style="text-align: center;line-height: 30px;">LuxuryNFT Successfully <br> Saved</span>
+                            <button class="sign" (click)="requestToOpenNFTCreate('QR Code')"> Scan Another Product </button>
+                        </div>
+                </div>
+            </div>
         </div>
     
     </div>
+
+    <ng-container *ngIf="productHistory.length > 0">
+        <div class="-tab-wrapper" *ngIf="viewMode == 'tab1' || viewMode == 'tab2'">
+            <div class="title w-per-100 jx-p-05 jx-mb-1 cubed-logo jx-mt-2">
+                <h2 class="jx-fs-24 jx-mb-0" (click)="submitAll()">History</h2>
+            </div>
+    
+            <div class="history">
+                <div class="history-card" *ngFor="let history of productHistory; let i=index">{{i}}</div>
+            </div>
+        </div>
+    </ng-container>
 </div>
+

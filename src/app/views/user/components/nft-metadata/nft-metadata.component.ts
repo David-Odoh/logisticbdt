@@ -10,6 +10,7 @@ import { ImageService } from 'src/app/shared/services/image.service';
 import { NftService } from 'src/app/shared/services/nft.service';
 import { NodeService } from 'src/app/shared/services/node.service';
 import { SecurityService } from 'src/app/shared/services/security.service';
+import { TransactionService } from 'src/app/shared/services/transaction.service';
 import { UIStateService } from 'src/app/shared/services/ui-state.service';
 import { DynamicFormComponent } from 'src/app/shared/widgets/dynamic-form/dynamic-form.component';
 import { FieldConfig } from 'src/app/shared/widgets/dynamic-form/models/field-config';
@@ -90,7 +91,7 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
     },
     {
       type: 'button',
-      label: 'Submit',
+      label: 'Proceed',
       name: 'submit',
     },
   ];
@@ -105,7 +106,8 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
     private $img: ImageService,
     private $nft: NftService,
     private $ns: NodeService,
-    private $security: SecurityService
+    private $security: SecurityService,
+    private $transact: TransactionService
     ) {
     this.subscriptions.add(
       this.route.url.subscribe(u => {
@@ -122,12 +124,15 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
         let pk = this.$ns.currentPK();
         if (pk) this.accountPK = pk;
       })
-    )
-  }
+    );
 
+  }
+  
   ngOnInit(): void {
     this.uploadedImageUrl = localStorage.getItem('CID');
     this.PID = localStorage.getItem('PID');
+    // Depends on PID
+    // this.getProductHistory();
   }
 
   ngAfterViewInit() {
@@ -220,9 +225,9 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
        );
       }
     }
-
-    
   }
+
+  preparedData: any = null;
 
   async submit2(data: any) {
     if (this.PID) {
@@ -234,49 +239,58 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
         data.product_image = this.uploadedImageUrl;
         console.log(data);
 
-        let signedData = await this.signMetadata(data);
-        // if (!data['product_label']) {
-        //   this.toastr.error('Product Label can\'t be empty', 'Required Field');
-        // }
-        // if (!data['product_name']) {
-        //   this.toastr.error('Product Name can\'t be empty', 'Required Field');
-        // }
-        // if (!data['product_brand']) {
-        //   this.toastr.error('Product Brand can\'t be empty', 'Required Field');
-        // }
-          if (signedData != null) {
-
-            console.log('Final Result: ', signedData)
-
-              this.busy = true;
+        if (!data['product_label']) {
+          this.toastr.error('Product Label can\'t be empty', 'Required Field');
+        }
+        else if (!data['product_name']) {
+          this.toastr.error('Product Name can\'t be empty', 'Required Field');
+        }
+        else if (!data['product_brand']) {
+          this.toastr.error('Product Brand can\'t be empty', 'Required Field');
+        } else {
+          this.preparedData = data;
+          this.viewMode = 'tab3'
+        }
+      } 
       
-              this.subscriptions.add(
-                this.$nft.saveNFT(signedData).subscribe(res => {
-                  let temp: any = res;
-                  if (temp) {
-                    this.toastr.success('Created Successfully', ``);
-        
-                    localStorage.removeItem('CID');            
-                    localStorage.removeItem('PID');            
-                    // setTimeout(() => this.viewMode = 'tab2', 100);
-                  }
-                  this.busy = false;
-                  console.log('NFT', res)
-                }, (err) => {
-                  this.busy = false;
-                  this.toastr.error('Failed to Create', 'Oops! Something went wrong. Try again');
-                  console.log(err)
-                })
-            );
-          } else this.toastr.success("Account Not Found", "No user account was selected!");
-
-  
-      } else {
+      else {
         this.toastr.success("No Image Found", "Kindly add a product image first.");
         setTimeout(() => this.viewMode = 'tab1', 100);
       }
 
     } else this.toastr.success("No Product ID Found", "Scan item again");
+  }
+
+  async submit3() {
+    if (this.preparedData) {
+      let signedData = await this.signMetadata(this.preparedData);
+        if (signedData != null) {
+
+          console.log('Final Result: ', signedData)
+
+            this.busy = true;
+    
+            this.subscriptions.add(
+              this.$nft.saveNFT(signedData).subscribe(res => {
+                let temp: any = res;
+                if (temp) {
+                  this.toastr.success('Created Successfully', ``);
+      
+                  localStorage.removeItem('CID');            
+                  localStorage.removeItem('PID');  
+                  this.preparedData = null;          
+                  setTimeout(() => this.viewMode = 'tab4', 100);
+                }
+                this.busy = false;
+                console.log('NFT', res)
+              }, (err) => {
+                this.busy = false;
+                this.toastr.error('Failed to Create', 'Oops! Something went wrong. Try again');
+                console.log(err)
+              })
+          );
+        } else this.toastr.success("Account Not Found", "No user account was selected!");    
+    }
   }
 
   deleteImage() {
@@ -285,6 +299,33 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
 
   resetForm () {
     this.form2.form.reset();
+  }
+
+  requestToOpenNFTCreate(option: string) {
+    this.router.navigate(["/user/nft-create/qr"]);
+
+    // Display Info in Main Area
+    this.$ui.updateNFTView(`Scan ${option}`);
+    this.$ui.updateSecondaryRoute('qr');
+    this.$ui.openInMainArea(option);
+  }
+  
+  productHistory = [];
+  getProductHistory() {
+    if (this.PID) {
+      this.subscriptions.add(
+        this.$transact.getTransactionsByPID(this.PID).subscribe( res => {
+          console.log(res)
+          if (res)
+            if (res['data'] != false) {
+              this.productHistory = res['data']
+            }
+        }, (err) => {
+          this.toastr.error('Failed to Create', 'Oops! Something went wrong. Try again');
+          console.log(err)
+        })
+      )
+    } else this.toastr.success("No Product ID Found", "Scan item again");
   }
 }
 

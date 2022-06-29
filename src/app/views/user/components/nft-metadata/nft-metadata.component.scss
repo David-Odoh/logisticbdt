@@ -103,6 +103,106 @@ li.-tab-trigger.active {
     }
 }
 
+.camera-launcher {
+    border-radius: 50px;
+    height: 45px;
+    width: 45px;
+    display: flex;
+    background: white;
+    align-items: center;
+    border: 2px solid #5baf62;
+    justify-content: center;
+    // box-shadow: 0px 2px 4px 1px #d6e0ea63;
+    margin-left: 20px;
+    cursor: pointer;
+    top: 0;
+    right: 8px;
+}
+
+.menu-title {
+    font-size: 18px;
+    color: #d72f3f;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.sidebar-thumbnail {
+    background-color: #ffff !important;
+    box-shadow: 0 6px 18px 0 rgb(0 35 90 / 8%), 0 0 2px 0 rgb(0 35 90 / 6%);
+    width: 255px;
+    height: 255px;
+    border: 1px solid;
+}
+
+.product-image, .sidebar-thumbnail {
+    position: relative;   
+    overflow: hidden;
+}
+.product-image {
+    width: 100%;
+    height: auto;
+}
+
+.float-it {
+    position: absolute;
+    top: 215px;
+    left: 210px;
+}
+
+input.float-it {
+    top: 210px;
+    left: 205px;
+    opacity: 0;
+    width: 40px;
+    cursor: pointer;
+}
+
+img#prodImage {
+    image-rendering: optimizeSpeed;            
+    image-rendering: -moz-crisp-edges;        
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: -o-crisp-edges;            
+    image-rendering: crisp-edges;              
+    -ms-interpolation-mode: nearest-neighbor; 
+}
+
+.data-row {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: .5fr 1fr;
+
+    &:nth-child(2n) {
+        background: #00235a0d;
+    }
+}
+
+.prev-sign-btns {
+    button {
+        letter-spacing: -0.5px;
+        cursor: pointer;
+        outline: 0;
+        line-height: 1;
+        text-align: center;
+        padding: 12px 30px;
+        font-size: 15px;
+        font-weight: 600;
+        border-radius: 2px;
+        display: inline-block;
+        border: none;
+        transition: background-color .3s, box-shadow .3s;
+        
+        &.sign {
+            background-color: var(--submit-btn-background-active);
+            color: var(--submit-btn-color-active);
+        }
+    }
+}
+
+#tab4 {
+    background-image: url('/assets/images/users/world-map-dots.png');
+    background-size: contain;
+}
+
 @media (max-width: 1400px) {
     .preview-attachment {
         display: none;
@@ -114,7 +214,20 @@ li.-tab-trigger.active {
     .-tab-wrapper {
         margin-bottom: 150px;
     }
-
+    .sidebar-thumbnail {
+        width: 180px;
+        height: 180px;
+        margin-left: 10%
+    }
+    .product-image {
+        width: 100%;
+        height: auto;
+    }
+    img.float-it, input.float-it {
+        position: absolute;
+        top: 145px;
+        left: 140px;
+    }
 }
 
 @media (max-width: 620px) {
@@ -132,4 +245,11 @@ li.-tab-trigger.active {
     .metadata-wrapper {
         height: 80vh;
     }
+    .sidebar-thumbnail {
+        width: 180px;
+        height: 180px;
+        margin-left: 10px
+    }
 }
+
+// #00235a14
