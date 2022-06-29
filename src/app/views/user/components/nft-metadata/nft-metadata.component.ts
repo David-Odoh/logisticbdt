@@ -284,23 +284,7 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
   }
 
   resetForm () {
-    setTimeout(() => {
-      let previousValid = this.form2.valid;
-      this.form2.changes.subscribe(() => {
-        if (this.form2.valid !== previousValid) {
-          previousValid = this.form2.valid;
-          this.form2.setDisabled('submit', !previousValid);
-        }
-      });
-
-      this.form2.setDisabled('submit', true);
-      this.form2.setValue('product_label', 'david');
-      this.form2.setValue('product_name', '');
-      this.form2.setValue('product_color', '');
-      this.form2.setValue('product_brand', '');
-      this.form2.setValue('description', '');
-
-    });
+    this.form2.form.reset();
   }
 }
 
