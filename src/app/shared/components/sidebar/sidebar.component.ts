@@ -16,7 +16,7 @@ export class SidebarComponent implements OnInit {
 
   navLinks = [
     { name: 'dashboard', url: '/user/home', toolTip: 'Home', iconClasses: 'remix ri-home-2-line' },
-    { name: 'profile', url: '/user/account', toolTip: 'Profile', iconClasses: 'remix ri-user-2-line' },
+    { name: 'profile', url: '/user/account', toolTip: 'Profile', iconClasses: 'remix ri-wallet-3-line' },
     // { name: 'market', url: '/user/market', toolTip: 'Market', iconClasses: 'remix ri-shopping-cart-line' },
     // { name: 'search', url: '/user/search', toolTip: 'Search', iconClasses: 'remix ri-search-2-line' },
   ];
