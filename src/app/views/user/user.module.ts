@@ -20,6 +20,9 @@ import { BrandRegisterComponent } from './brand-pages/brand-register/brand-regis
 import { BrandMetadataComponent } from './components/brand-metadata/brand-metadata.component';
 import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
 import { NftNfcReaderComponent } from './components/nft-nfc-reader/nft-nfc-reader.component';
+import { SearchResultComponent } from './components/search-result/search-result.component';
+import { NftVerifyEntryComponent } from './components/nft-verify-entry/nft-verify-entry.component';
+import { NftHistoryComponent } from './components/nft-history/nft-history.component';
 
 
 @NgModule({
@@ -40,6 +43,9 @@ import { NftNfcReaderComponent } from './components/nft-nfc-reader/nft-nfc-reade
     BrandMetadataComponent,
     ComingSoonComponent,
     NftNfcReaderComponent,
+    SearchResultComponent,
+    NftVerifyEntryComponent,
+    NftHistoryComponent,
   ],
   imports: [
     CommonModule,

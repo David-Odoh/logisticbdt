@@ -1,1 +1,8 @@
-<p>nft-verify works!</p>
+<div class="nfts-page-wrap jx-d-flex">
+    <div class="nft-leftsidebar theme-color-bg">
+        <nft-scan-options [title]="terms_from_dic[1]?.name"></nft-scan-options>
+    </div>
+    <div class="nft-viewer w-per-100" [class.nft-viewer-show]="openInMainArea">
+        <nft-create-entry [title]="terms_from_dic[1]?.name" (closeThread)="closeMainArea($event)"></nft-create-entry>
+    </div>
+</div>

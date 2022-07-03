@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { UIStateService } from 'src/app/shared/services/ui-state.service';
 
 @Component({
@@ -9,13 +10,22 @@ import { UIStateService } from 'src/app/shared/services/ui-state.service';
   styleUrls: ['./nft-scan-options.component.scss']
 })
 export class NftScanOptionsComponent implements OnInit {
+  subscriptions: Subscription = new Subscription();
   @ViewChild('searchbox') input: any;
   @Input() title: any = 'LBDT';
+  currentUrl: string = '';
 
   constructor(private router: Router, private $ui: UIStateService, private $loc: Location) {
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.currentUrl = this.router.url;
+
+    this.subscriptions.add(
+      this.router.events.subscribe((val) => {
+        if (val instanceof NavigationEnd) this.currentUrl = this.router.url;
+    }));
+  }
 
   requestToOpenNFTCreate(option: string) {
 
@@ -24,12 +34,18 @@ export class NftScanOptionsComponent implements OnInit {
     this.$ui.openInMainArea(option);
     
     if (option === 'NFC') {
-      this.router.navigate(["/user/nft-create/nfc"]);
+      if (this.currentUrl.includes('verify'))
+        this.router.navigate(["/user/nft-verify/nfc"]);
+      else
+        this.router.navigate(["/user/nft-create/nfc"]);
       this.$ui.updateSecondaryRoute('nfc');
     } 
     
     else {
-      this.router.navigate(["/user/nft-create/qr"]);
+      if (this.currentUrl.includes('verify'))
+        this.router.navigate(["/user/nft-verify/qr"]);
+      else
+        this.router.navigate(["/user/nft-create/qr"]);
       this.$ui.updateSecondaryRoute('qr');
     }
 

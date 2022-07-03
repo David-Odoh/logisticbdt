@@ -20,7 +20,7 @@ export class TransactionService {
 
   // Create Transactions
   getTransactionsByPID(PID: any): Observable<any> {
-    return this.http.get(`${this.BASE_URL}/v1/transaction/${PID}/pid_exit`)
+    return this.http.get(`${this.BASE_URL}/v1/transaction/pid_exit`, {params: {pid: PID}})
       .pipe(map(res => { return res }),
         catchError(this.handleError)
       );

@@ -36,7 +36,7 @@ export class NftService {
  
   // HANDLE ALL ERRORS
   private handleError(error: HttpErrorResponse) {
-    // console.error('An error occurred:', error);
+    console.error('An error occurred:', error);
     // console.error(
     //   `Server returned code ${error.status}, ` +
     //   `body was: ${error.message}`);

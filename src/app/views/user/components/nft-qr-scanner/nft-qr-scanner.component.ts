@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { BarcodeFormat } from '@zxing/library';
+import { Subscription } from 'rxjs';
 import { NftService } from 'src/app/shared/services/nft.service';
 import { UIStateService } from 'src/app/shared/services/ui-state.service';
 
@@ -11,6 +12,7 @@ import { UIStateService } from 'src/app/shared/services/ui-state.service';
   styleUrls: ['./nft-qr-scanner.component.scss']
 })
 export class NftQrScannerComponent implements OnInit {
+  subscriptions: Subscription = new Subscription();
   allowedFormats = [ 
     BarcodeFormat.QR_CODE, 
     BarcodeFormat.EAN_13, 
@@ -29,12 +31,19 @@ export class NftQrScannerComponent implements OnInit {
    ];
 
    qrResultString: any = null;
+   currentUrl: string = '';
    //@ts-ignore
    @ViewChild("scanner", { static: true }) scanner: ElementRef;
 
   constructor(private router: Router, private $nft: NftService, private $ui: UIStateService) { }
 
   ngOnInit(): void {
+    this.currentUrl = this.router.url;
+
+    this.subscriptions.add(
+      this.router.events.subscribe((val) => {
+        if (val instanceof NavigationEnd) this.currentUrl = this.router.url;
+    }));
   }
 
   clearResult(): void {
@@ -62,7 +71,10 @@ export class NftQrScannerComponent implements OnInit {
       this.$ui.updateSecondaryRoute('metadata');
       this.$ui.openInMainArea('metadata');
 
-      this.router.navigate(['/user/nft-create/metadata']);
+      if (this.currentUrl.includes('verify'))
+        this.router.navigate(['/user/nft-verify/history']);
+      else
+        this.router.navigate(['/user/nft-create/metadata']);
     }
   }
 }

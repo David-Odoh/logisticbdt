@@ -1,0 +1,25 @@
+<div class="jx-m-1 jx-d-block metadata-wrapper jx-p-relative" style="overflow-y: auto; ">
+     <!-- Busy -->
+     <span class="form-overlay" *ngIf="busy"><i class="la la-refresh icon-spin cubed-logo"></i></span>
+    <ng-container *ngIf="!productExist; else itEsixts">
+        <div class="exists jx-d-flex justify-content-center jx-mt-2">
+            <h2 style="margin:0">LuxuryNFT Does Not 
+                <span style="color: white; background: #f61d3f; padding: 4px 10px;"> Exist</span> 
+            </h2>
+        </div>
+    </ng-container>
+    <ng-template #itEsixts>
+        <div class="exists jx-d-flex justify-content-center jx-mt-2">
+            <h2 style="margin:0">LuxuryNFT Already 
+                <span style="color: white; background: #f61d3f; padding: 4px 10px;"> Exists</span> 
+            </h2>
+        </div>
+    </ng-template>
+
+    <div class="-tab-wrapper">
+            <ng-container *ngIf="PID != ''">
+                <search-result [PID]="PID" (productExist)="productAlreadyExist($event)" (busy)="isBusy($event)"></search-result>
+            </ng-container>
+        </div>
+</div>
+

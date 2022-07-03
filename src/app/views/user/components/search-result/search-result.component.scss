@@ -1,0 +1,44 @@
+h2 {
+    box-sizing: border-box;
+    font-family: "Raleway", sans-serif !important;
+    margin-bottom: 0 !important;
+}
+
+.history-card {
+    margin-top: 4px;
+    border: 1px solid #d6e0ea;
+    box-shadow: 0 6px 18px 0 rgb(0 35 90 / 8%), 0 0 2px 0 rgb(0 35 90 / 6%);
+    padding: 10px 0;
+
+    .card-img {
+        max-height: 70px;
+        width: auto;
+        overflow: hidden;
+        margin: 0 10px;
+        
+        img {
+            max-height: 70px;
+            max-width: 200px;
+        }
+    }
+
+    .card-info {
+        width: 80%;
+        .txn-count {
+            color: #989898;
+        }
+    
+        .ownership {
+            color: #3ca538;
+            background-color: #85c98229;
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-weight: bolder;
+            &.mine {
+                color: #E52F45;
+                background-color: #e52f4517;
+            }
+        }
+    }
+
+}

@@ -1,0 +1,25 @@
+<div class="search-result-rap" *ngIf="productHistory?.length">
+    <div class="title w-per-100 jx-p-05 jx-mb-1 cubed-logo jx-mt-2">
+        <h2 class="jx-fs-24 jx-mb-0">History</h2>
+    </div>
+
+    <div class="history">
+        <div class="" *ngFor="let history of productHistory; let i=index">
+            <div class="history-card jx-d-flex">
+                <div class="card-img">
+                    <img [src]="$any(history)?.product_image" alt="">
+                </div>
+                <div class="card-info jx-mr-1">
+                    <div class="line-one jx-fs-16 jx-fw-bold jx-t-capitalize">{{$any(history)?.product_name}}</div>
+                    <div class="line-two">Product ID: {{$any(history)?.attributes[3]?.value}}</div>
+                    <div class="line-three jx-d-flex justify-content-between">
+                        <span class="txn-count">Transaction {{i + 1}}</span>
+                        <span class="ownership" [class.mine]="accountPK == $any(history)?.attributes[4]?.value">
+                            Owner: {{ accountPK == $any(history)?.attributes[4]?.value ? 'Mine' : 'Someone'}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

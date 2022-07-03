@@ -5,11 +5,11 @@ import { NodeService } from 'src/app/shared/services/node.service';
 import { UIStateService } from 'src/app/shared/services/ui-state.service';
 
 @Component({
-  selector: 'nft-create-entry',
-  templateUrl: './nft-create-entry.component.html',
-  styleUrls: ['./nft-create-entry.component.scss']
+  selector: 'app-nft-verify-entry',
+  templateUrl: './nft-verify-entry.component.html',
+  styleUrls: ['./nft-verify-entry.component.scss']
 })
-export class NftCreateEntryComponent implements OnInit {
+export class NftVerifyEntryComponent implements OnInit {
   subscriptions: Subscription = new Subscription();
   @Output() closeThread = new EventEmitter();
   @Input() title: any = 'LuxuryNFT';

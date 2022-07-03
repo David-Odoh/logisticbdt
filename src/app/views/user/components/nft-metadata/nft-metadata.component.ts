@@ -31,6 +31,7 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
   title: string = 'Metadata';
   uploadedImageUrl: any = '';
   PID: any = '';
+  productExist = false;
 
   terms = new Dictionary().terms;
 
@@ -72,9 +73,10 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
     },
     {
       type: 'input',
-      label: 'Product Color',
+      label: 'Product Color *',
       name: 'product_color',
       placeholder: 'Enter Color Name',
+      validation: [Validators.required]
     },
     {
       type: 'input',
@@ -85,9 +87,10 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
     },
     {
       type: 'textarea',
-      label: 'Description',
+      label: 'Description *',
       name: 'description',
       placeholder: 'Enter Description',
+      validation: [Validators.required]
     },
     {
       type: 'button',
@@ -107,7 +110,6 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
     private $nft: NftService,
     private $ns: NodeService,
     private $security: SecurityService,
-    private $transact: TransactionService
     ) {
     this.subscriptions.add(
       this.route.url.subscribe(u => {
@@ -131,8 +133,7 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.uploadedImageUrl = localStorage.getItem('CID');
     this.PID = localStorage.getItem('PID');
-    // Depends on PID
-    // this.getProductHistory();
+    console.log('PID', this.PID);
   }
 
   ngAfterViewInit() {
@@ -219,7 +220,7 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
             console.log(res)
           }, (err) => {
             this.busy = false;
-            this.toastr.error('Failed to Save', 'Oops! Something went wrong. Try again');
+            this.toastr.error('Oops! Something went wrong. Try again', 'Failed to Upload');
             console.log(err)
           })
        );
@@ -247,18 +248,25 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
         }
         else if (!data['product_brand']) {
           this.toastr.error('Product Brand can\'t be empty', 'Required Field');
-        } else {
+        } 
+        else if (!data['product_color']) {
+          this.toastr.error('Product Color can\'t be empty', 'Required Field');
+        }
+        else if (!data['description']) {
+          this.toastr.error('Description can\'t be empty', 'Required Field');
+        } 
+        else {
           this.preparedData = data;
           this.viewMode = 'tab3'
         }
       } 
       
       else {
-        this.toastr.success("No Image Found", "Kindly add a product image first.");
+        this.toastr.success("Kindly add a product image first.", "No Image Found");
         setTimeout(() => this.viewMode = 'tab1', 100);
       }
 
-    } else this.toastr.success("No Product ID Found", "Scan item again");
+    } else this.toastr.success("No Product ID Found", "Scan Item Again");
   }
 
   async submit3() {
@@ -285,8 +293,10 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
                 console.log('NFT', res)
               }, (err) => {
                 this.busy = false;
+
                 this.toastr.error('Failed to Create', 'Oops! Something went wrong. Try again');
                 console.log(err)
+                console.log(err.status)
               })
           );
         } else this.toastr.success("Account Not Found", "No user account was selected!");    
@@ -310,22 +320,14 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
     this.$ui.openInMainArea(option);
   }
   
-  productHistory = [];
-  getProductHistory() {
-    if (this.PID) {
-      this.subscriptions.add(
-        this.$transact.getTransactionsByPID(this.PID).subscribe( res => {
-          console.log(res)
-          if (res)
-            if (res['data'] != false) {
-              this.productHistory = res['data']
-            }
-        }, (err) => {
-          this.toastr.error('Failed to Create', 'Oops! Something went wrong. Try again');
-          console.log(err)
-        })
-      )
-    } else this.toastr.success("No Product ID Found", "Scan item again");
+  productAlreadyExist($evt: any) {
+    if ($evt) this.productExist = true;
+    else this.productExist = false;
+  }
+  
+  isBusy($evt: any) {
+    if ($evt) this.busy = true;
+    else this.busy = false;
   }
 }
 
