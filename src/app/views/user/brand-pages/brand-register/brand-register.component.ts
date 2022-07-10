@@ -10,13 +10,9 @@ import { Router } from '@angular/router';
 export class BrandRegisterComponent implements OnInit {
   accountName = 'Register Brand';
 
-  constructor(private loc: Location, private router: Router) { }
+  constructor(private loc: Location) { }
 
   ngOnInit(): void {
-  }
-
-  verify() {
-    this.router.navigate(['/verify-brand']);
   }
 
   goBack() {
