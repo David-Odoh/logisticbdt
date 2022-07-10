@@ -127,37 +127,41 @@ export class BrandMetadataComponent implements OnInit, AfterViewInit, OnDestroy 
     let verifiedDomain = await this.ensureDomainIntegrity(data);
     
     console.log('verifiedDomain', verifiedDomain)
-
-    this.verifyBrand();
     
     if (verifiedDomain) {
         data['status'] = true;
         console.log('data', data)
-        console.log('Proceed!!!');
         this.busy = true;
-
-      this.subscriptions.add(
-        this.$brand.saveBrand(data).subscribe(res => {
+        
+        this.subscriptions.add(
+          this.$brand.saveBrand(data).subscribe(res => {
+          console.log('Proceed!!!', res);
           let temp: any = res;
           if (temp) {
             this.toastr.success('Saved Successfully', ``);
             this.resetForm();         
+
+            this.sendUserVerificationEmail(temp)
           }
           this.busy = false;
           console.log(res)
         }, (err) => {
-          this.busy = false;
-          this.toastr.error('Oops! Something went wrong. Try again', 'Failed to Save');
           console.log(err)
+          this.busy = false;
+          if (err == '409') 
+            this.toastr.error('Host domain is already taken', 'Domain Conflict');
+          else
+            this.toastr.error('Oops! Something went wrong. Try again', 'Failed to Save');
         }));
     }
   }
 
-  sendUserVerificationEmail() {
+  sendUserVerificationEmail(data: any) {
     this.toastr.success('Sending verification email', `Please Wait!`);
     this.busy = true;
+
     this.subscriptions.add(
-      this.$brand.sendVerificationEmail().subscribe(res => {
+      this.$brand.sendVerificationEmail(data).subscribe(res => {
         let temp: any = res;
         if (temp) {
           this.toastr.success('Verification email sent', `Success`);
@@ -165,8 +169,10 @@ export class BrandMetadataComponent implements OnInit, AfterViewInit, OnDestroy 
           //Navigate to Enter Verification Code  
           this.verifyBrand();
         }
+
         this.busy = false;
           console.log(res)
+
         }, (err) => {
           this.busy = false;
           this.toastr.error('Oops! Something went wrong. Try again', 'Failed to Send Email');

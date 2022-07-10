@@ -27,17 +27,22 @@ export class BrandService {
   }
 
   // Send User Verification Email
-  sendVerificationEmail(): Observable<any> {
-    return this.http.get(`${this.BASE_URL}/v1/brand/new`)
-      .pipe(map(res => { return res }),
+  sendVerificationEmail(data: any): Observable<any> {
+    return this.http.get(`${this.BASE_URL}/v1/brand/send_email`, { params: {
+      host_email: data.host_email,
+      brand_id: data.brand_id
+    }
+  }).pipe(map(res => { return res }),
         catchError(this.handleError)
       );
   }
 
   // Create Brands
   verifyBrand(data: any): Observable<any> {
-    return this.http.post(`${this.BASE_URL}/v1/brand/new`, data)
-      .pipe(map(res => { return res }),
+    return this.http.get(`${this.BASE_URL}/v1/brand/verify_secret`, { params: {
+      secrets_id: data.secrets_id
+    }
+  }).pipe(map(res => { return res }),
         catchError(this.handleError)
       );
   }
@@ -51,7 +56,8 @@ export class BrandService {
     if (error.status == 404) {
       this.toastr.error('Unauthorized', 'An Issue Occurred!');
       return throwError('Brands Not Found!');
-    }
+    } 
+    if (error.status == 409) {return throwError('409')};
     return throwError('Oops, unable to complete! please try again later.');
   }
 }

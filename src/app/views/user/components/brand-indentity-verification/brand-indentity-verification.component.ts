@@ -26,7 +26,7 @@ export class BrandIndentityVerificationComponent implements OnInit {
     {
       type: 'input',
       label: 'Verification Code *',
-      name: 'brand_name',
+      name: 'secrets_id',
       placeholder: 'Enter Code Here',
       validation: [Validators.required]
     },
@@ -88,7 +88,7 @@ export class BrandIndentityVerificationComponent implements OnInit {
           if (temp) {
             this.toastr.success('Verified Successfully', ``);
             this.resetForm();     
-            this.registerBrand();    
+            this.backToHome();    
           }
           this.busy = false;
           console.log(res)
@@ -100,7 +100,7 @@ export class BrandIndentityVerificationComponent implements OnInit {
     }
   }
 
-  registerBrand() {
-    this.router.navigate(['/user/register-brand']);
+  backToHome() {
+    this.router.navigate(['/user/home']);
   }
 }
