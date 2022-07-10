@@ -25,6 +25,8 @@ import { NftVerifyEntryComponent } from './components/nft-verify-entry/nft-verif
 import { NftHistoryComponent } from './components/nft-history/nft-history.component';
 import { BrandVerifyComponent } from './brand-pages/brand-verify/brand-verify.component';
 import { BrandIndentityVerificationComponent } from './components/brand-indentity-verification/brand-indentity-verification.component';
+import { AccountFormComponent } from './components/account-form/account-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -50,12 +52,14 @@ import { BrandIndentityVerificationComponent } from './components/brand-indentit
     NftHistoryComponent,
     BrandVerifyComponent,
     BrandIndentityVerificationComponent,
+    AccountFormComponent,
   ],
   imports: [
     CommonModule,
     UserRoutingModule,
     ZXingScannerModule,
     DynamicFormModule,
+    ReactiveFormsModule
   ]
 })
 export class UserModule { }

@@ -11,14 +11,16 @@ export class AccountSettingsComponent implements OnInit {
   accountName = 'Welcome back!';
   subscriptions: Subscription = new Subscription();
 
+  acc: any = null;
+
   constructor(private ns$: NodeService) { 
     this.subscriptions.add(
       this.ns$._accountHashAvailable$.subscribe(v  => {
-          let acc = this.ns$.currentAccount();
-          console.log('New', acc)
-          if (acc) {
-            if ('name' in acc) {
-              this.accountName = acc.name;
+          this.acc = this.ns$.currentAccount();
+          console.log('New', this.acc)
+          if (this.acc) {
+            if ('name' in this.acc) {
+              this.accountName = this.acc.name;
             }
           }
       })

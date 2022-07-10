@@ -3,9 +3,20 @@
         <div class="logged-in-account jx-d-flex jx-mb-1">
             <span class="user-account">{{accountName}}</span>
         </div>
-        <div class="select-account jx-d-flex justify-content-center align-items-center">
+        <div class="select-account jx-d-flex justify-content-center align-items-center jx-px-1">
             <!-- <h2>Select Account</h2> -->
-            <coming-soon></coming-soon>
+            <!-- <coming-soon></coming-soon> -->
+            <ng-container *ngIf="(acc != null || acc != undefined); else download">
+                <account-form [selectedAccount]="acc"></account-form>
+            </ng-container>
+            <ng-template #download>
+                <div class="jx-fs-18 jx-t-center">
+                   <div class="jx-pb-1">No account found yet. This may take a little while...</div> 
+                   <div>
+                       If you don't have a Polkadot Wallet, <br> <a style="color: #d72f3f;">download here</a>.
+                   </div>
+                </div>
+            </ng-template>
         </div>
     </div>
 </div>

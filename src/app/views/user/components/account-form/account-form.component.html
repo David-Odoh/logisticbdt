@@ -1,0 +1,18 @@
+<div class="row-container">
+    <form [formGroup]="accountForm">
+        <div class="jexta-select" [ngClass]="dropdown ? 'open': ''" (click)="toggleSelect()" (clickOutside)="close()">
+            <div class="jexta-select_input">
+                <!-- Actual Input -->
+                <input type="text" [formControl]="accountSelect" style="display: none;" readonly>
+                <!-- Decoy Input -->
+                <input type="text" [value]="decoyValue" class="decoy" placeholder="Select Account" readonly>
+                <div class="arrow"></div>
+            </div>
+            <div class="jexta-options">
+                <ng-container *ngFor="let option of accounts">
+                    <span class="jexta-option" [ngClass]="option == selectedAccount ? 'selected' : ''" (click)="updateSelectValue(option)">{{ option.name }}</span>
+                </ng-container>
+            </div>
+        </div>
+    </form>
+</div>
