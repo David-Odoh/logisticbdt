@@ -1,0 +1,35 @@
+.logged-in-account {
+    justify-content: center;
+    .user-account {
+        color: #fff;
+        font-size: 20px;
+        margin-top: 30px;
+        margin-right: 20px;
+    }
+}
+
+.back-btn {
+    top: 30px;
+    color: #fff;
+    cursor: pointer;
+    padding-left: 20px;
+}
+
+.menu-container {
+    background-color: #ffffff;
+    bottom: 0;
+    right: 0;
+    height: 98vh;
+}
+
+#curved-border {
+    height: 100px;
+    width: 100vw;
+    border-radius: 0px 0px 100vh 100vh;
+}
+
+@media (max-width: 680px) {
+
+}
+
+

@@ -23,6 +23,8 @@ import { NftNfcReaderComponent } from './components/nft-nfc-reader/nft-nfc-reade
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { NftVerifyEntryComponent } from './components/nft-verify-entry/nft-verify-entry.component';
 import { NftHistoryComponent } from './components/nft-history/nft-history.component';
+import { BrandVerifyComponent } from './brand-pages/brand-verify/brand-verify.component';
+import { BrandIndentityVerificationComponent } from './components/brand-indentity-verification/brand-indentity-verification.component';
 
 
 @NgModule({
@@ -46,6 +48,8 @@ import { NftHistoryComponent } from './components/nft-history/nft-history.compon
     SearchResultComponent,
     NftVerifyEntryComponent,
     NftHistoryComponent,
+    BrandVerifyComponent,
+    BrandIndentityVerificationComponent,
   ],
   imports: [
     CommonModule,

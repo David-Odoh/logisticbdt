@@ -1,0 +1,10 @@
+<div>
+    <div class="menu-title jx-t-uppercase">Brand Identity Verification</div>
+    <div class="menu-items">
+        <div class="row-one jx-d-grid jx-p-relative">
+            <!-- Busy -->
+            <span class="form-overlay" *ngIf="busy"><i class="la la-refresh icon-spin cubed-logo"></i></span>
+            <dynamic-form [float]="float_style" [config]="config" #form="dynamicForm" (submit)="submit($event)"></dynamic-form>
+        </div>
+    </div>
+</div>

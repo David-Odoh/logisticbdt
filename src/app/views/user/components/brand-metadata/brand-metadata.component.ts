@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { BrandService } from 'src/app/shared/services/brand.service';
@@ -53,7 +54,9 @@ export class BrandMetadataComponent implements OnInit, AfterViewInit, OnDestroy 
   constructor(
     private toastr: ToastrService,
     private $brand: BrandService,
-    private $ns: NodeService) { 
+    private router: Router,
+    private $ns: NodeService,
+    ) { 
       this.subscriptions.add(
         this.$ns._accountHashAvailable$.subscribe(v => {
           let pk = this.$ns.currentPK();
@@ -124,6 +127,8 @@ export class BrandMetadataComponent implements OnInit, AfterViewInit, OnDestroy 
     let verifiedDomain = await this.ensureDomainIntegrity(data);
     
     console.log('verifiedDomain', verifiedDomain)
+
+    this.verifyBrand();
     
     if (verifiedDomain) {
         data['status'] = true;
@@ -148,4 +153,28 @@ export class BrandMetadataComponent implements OnInit, AfterViewInit, OnDestroy 
     }
   }
 
+  sendUserVerificationEmail() {
+    this.toastr.success('Sending verification email', `Please Wait!`);
+    this.busy = true;
+    this.subscriptions.add(
+      this.$brand.sendVerificationEmail().subscribe(res => {
+        let temp: any = res;
+        if (temp) {
+          this.toastr.success('Verification email sent', `Success`);
+          this.resetForm();  
+          //Navigate to Enter Verification Code  
+          this.verifyBrand();
+        }
+        this.busy = false;
+          console.log(res)
+        }, (err) => {
+          this.busy = false;
+          this.toastr.error('Oops! Something went wrong. Try again', 'Failed to Send Email');
+          console.log(err)
+        }));
+    }
+
+  verifyBrand() {
+    this.router.navigate(['/user/verify-brand']);
+  }
 }

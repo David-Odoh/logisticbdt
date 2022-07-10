@@ -6,12 +6,13 @@ export const environment = {
   appName: 'logistic_bdt_web',
   developmentKeyring: true,
   production: false,
-  providerSocket: 'wss://gladios.aresprotocol.io',
+  providerSocket: 'wss://kusama-rpc.polkadot.io/',
   rpc: {},
   secretKey: '0123456789123456',
   secretIV: '0123456789123456',
 };
 
+// providerSocket: 'wss://gladios.aresprotocol.io',
 // providerSocket: 'ws://127.0.0.1:9944',
 
 /*

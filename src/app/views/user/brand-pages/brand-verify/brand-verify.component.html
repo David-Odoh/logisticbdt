@@ -1,0 +1,17 @@
+<div class="nfts-page-wrap jx-d-flex theme-color-bg h-100vh jx-p-relative">
+    <div class="nfts-page-wrap jx-d-block jx-p-relative" style="z-index: 1; max-height: 100px;">
+        <i class="ri-arrow-left-line jx-p-absolute jx-fs-26 back-btn" (click)="goBack()"></i>
+        <div class="logged-in-account jx-d-flex">
+            <span class="user-account">{{accountName}}</span>
+        </div>
+    </div>
+
+    <div class="menu-container nfts-page-wrap jx-p-absolute">
+        <div class="jx-p-relative jx-d-flex justify-content-center">
+            <div  id="curved-border" class="theme-color-bg"></div>
+        </div>
+        <ng-container>
+            <brand-indentity-verification></brand-indentity-verification>
+        </ng-container>
+    </div>
+</div>

@@ -25,6 +25,22 @@ export class BrandService {
         catchError(this.handleError)
       );
   }
+
+  // Send User Verification Email
+  sendVerificationEmail(): Observable<any> {
+    return this.http.get(`${this.BASE_URL}/v1/brand/new`)
+      .pipe(map(res => { return res }),
+        catchError(this.handleError)
+      );
+  }
+
+  // Create Brands
+  verifyBrand(data: any): Observable<any> {
+    return this.http.post(`${this.BASE_URL}/v1/brand/new`, data)
+      .pipe(map(res => { return res }),
+        catchError(this.handleError)
+      );
+  }
  
   // HANDLE ALL ERRORS
   private handleError(error: HttpErrorResponse) {
