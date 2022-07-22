@@ -15,7 +15,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.ns$._accountHashAvailable$.subscribe(v  => {
           let acc = this.ns$.currentAccount();
-          console.log('New', acc)
+          // console.log('New', acc)
           if (acc) {
             if ('name' in acc) {
               this.accountName = acc.name;
