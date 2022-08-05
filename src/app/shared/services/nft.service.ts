@@ -33,6 +33,14 @@ export class NftService {
         catchError(this.handleError)
       );
   }
+
+  // View all my NFTs
+  myNFTs(PK2: any): Observable<any> {
+    return this.http.get(`${this.BASE_URL}/v1/transaction/pk2`, {params: {pk2: PK2}})
+      .pipe(map(res => { return res }),
+        catchError(this.handleError)
+      );
+  }
  
   // HANDLE ALL ERRORS
   private handleError(error: HttpErrorResponse) {

@@ -11,6 +11,7 @@ import { NftQrScannerComponent } from './components/nft-qr-scanner/nft-qr-scanne
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { StoreFrontComponent } from './market-pages/store-front/store-front.component';
 import { NftCreateComponent } from './nft-pages/nft-create/nft-create.component';
+import { NftListComponent } from './nft-pages/nft-list/nft-list.component';
 import { NftVerifyComponent } from './nft-pages/nft-verify/nft-verify.component';
 import { SearchHomeComponent } from './search-pages/search-home/search-home.component';
 
@@ -44,11 +45,12 @@ const routes: Routes = [
       { path: '**', redirectTo: 'fh', pathMatch: "full" },
       ]
     }, 
+  { path: "nft-list", component: NftListComponent}, 
   { path: "register-brand", component: BrandRegisterComponent}, 
   { path: "verify-brand", component: BrandVerifyComponent}, 
   { path: 'home', component: DashboardPageComponent}, 
-  { path: 'market', component: StoreFrontComponent}, 
-  { path: 'search', component: SearchHomeComponent}, 
+  // { path: 'market', component: StoreFrontComponent}, 
+  // { path: 'search', component: SearchHomeComponent}, 
   { path: 'account', component: AccountSettingsComponent}, 
 
 ];

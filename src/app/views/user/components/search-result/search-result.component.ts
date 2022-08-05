@@ -45,10 +45,10 @@ export class SearchResultComponent implements OnInit {
           this.busy.emit(false);
           
           if (res)
-          if (res['data'] != false) {
-            this.productHistory = res['data'];
-            this.productExist.emit(true);
-          }
+            if (res['data'] != false) {
+              this.productHistory = res['data'];
+              this.productExist.emit(true);
+            }
         }, (err) => {
           this.busy.emit(false);
           this.toastr.error('Oops! Something went wrong. Try again', 'History couldn\'t load');

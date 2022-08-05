@@ -9,12 +9,17 @@
         </div>
 
         <div class="nfts-list h-per-100 jx-p-2">
-           <span class="jx-t-uppercase jx-my-2 jx-d-block jx-fs-15">Select scan option</span>
+           <span class="jx-t-uppercase jx-mt-2 jx-d-block jx-fs-15">Select scan option</span>
            <div class="button-list">
                <button class="jx-t-uppercase" (click)="requestToOpenNFTCreate('Barcode')">Barcode</button>
                <button class="jx-t-uppercase" (click)="requestToOpenNFTCreate('QR Code')">QR Code</button>
                <button class="jx-t-uppercase" (click)="requestToOpenNFTCreate('NFC')">NFC</button>
-           </div>
+            </div>
+            <span class="jx-t-uppercase jx-d-block jx-fs-15">Manage LuxuryNFT</span>
+            <div class="button-list">
+                <button class="jx-t-uppercase" routerLink="/user/nft-list">View My NFTs</button>
+            </div>
         </div>
+     
     </div>
 </div>

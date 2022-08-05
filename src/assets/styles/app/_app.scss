@@ -52,3 +52,22 @@ a:focus,
 a:hover {
     text-decoration: none;
 }
+
+.rotate {
+    animation: rotation 1s infinite linear;
+  }
+  
+  @keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
+
+@media(max-width: 680px) {
+    .mobile-hidden {
+        display: none !important;
+    }
+}

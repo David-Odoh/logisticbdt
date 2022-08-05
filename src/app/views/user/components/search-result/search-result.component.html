@@ -16,7 +16,7 @@
                         <span class="txn-count">Transaction {{i + 1}}</span>
                         <span class="ownership" [class.mine]="accountPK == $any(history)?.attributes[4]?.value">
                             Owner: {{ accountPK == $any(history)?.attributes[4]?.value ? 'Mine' : 'Someone'}}
-                        </span>
+                        </span> 
                     </div>
                 </div>
             </div>
