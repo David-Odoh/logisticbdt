@@ -26,13 +26,13 @@
                             <div class="line-one jx-fs-16 jx-fw-bold jx-t-capitalize">{{$any(history)?.product_name}} <span class="txn-count">{{i + 1}}</span></div>
                             <div class="line-two">Product ID: {{$any(history)?.attributes[3]?.value}}</div>
                             <div class="line-three jx-d-flex justify-content-between jx-mt-05">
-                                <span class="minted-by mobile-hidden">Minted by: david@gmail.com</span>
+                                <span class="minted-by mobile-hidden">Minted by: {{$any(history)?.attributes[5]?.value}}</span>
                                 <span class="tags">
                                     <span class="ownership" [class.mine]="accountPK == $any(history)?.attributes[4]?.value">
                                         Owner: {{ accountPK == $any(history)?.attributes[4]?.value ? 'Mine' : 'Someone'}}
                                     </span> 
                                     <span class="jx-mx-05" *ngIf="accountPK == $any(history)?.attributes[4]?.value"></span>
-                                    <span class="transfer-btn" *ngIf="accountPK == $any(history)?.attributes[4]?.value">Transfer</span>
+                                    <span class="transfer-btn" *ngIf="accountPK == $any(history)?.attributes[4]?.value" routerLink="/user/nft-transfer">Transfer</span>
                                 </span>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
         </div> 
 
         <ng-template #giveUserFeedback>
-            <div class="search-result-rap">
+            <div class="search-result-rap w-100vw">
                 <div class="exists jx-d-flex justify-content-center jx-mt-6">
                     <h2 style="margin:0" *ngIf="busy; else noData">Please wait 
                         <span style="color: white; background: #f61d3f; padding: 4px 10px; display: inline-flex; gap: 6px;"> 

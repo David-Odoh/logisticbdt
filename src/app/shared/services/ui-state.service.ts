@@ -37,4 +37,10 @@ export class UIStateService {
     this.nftPageInView = title;
   }
 
+  resetVariables() {
+    this.secRoute.next('fh');
+    this.nftPageInView = '';
+    this.mainAreaOpener.next(null);
+  }
+
 }

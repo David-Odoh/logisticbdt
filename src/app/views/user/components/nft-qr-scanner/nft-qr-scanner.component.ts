@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { BarcodeFormat } from '@zxing/library';
 import { Subscription } from 'rxjs';
@@ -11,7 +11,7 @@ import { UIStateService } from 'src/app/shared/services/ui-state.service';
   templateUrl: './nft-qr-scanner.component.html',
   styleUrls: ['./nft-qr-scanner.component.scss']
 })
-export class NftQrScannerComponent implements OnInit {
+export class NftQrScannerComponent implements OnInit, OnDestroy {
   subscriptions: Subscription = new Subscription();
   allowedFormats = [ 
     BarcodeFormat.QR_CODE, 
@@ -44,6 +44,13 @@ export class NftQrScannerComponent implements OnInit {
       this.router.events.subscribe((val) => {
         if (val instanceof NavigationEnd) this.currentUrl = this.router.url;
     }));
+  }
+
+  ngOnDestroy(): void {
+    // @ts-ignore
+    this.scanner.scanStop();
+
+    this.subscriptions.unsubscribe();
   }
 
   clearResult(): void {

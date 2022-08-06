@@ -27,6 +27,7 @@ import { BrandVerifyComponent } from './brand-pages/brand-verify/brand-verify.co
 import { BrandIndentityVerificationComponent } from './components/brand-indentity-verification/brand-indentity-verification.component';
 import { AccountFormComponent } from './components/account-form/account-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NftTransferComponent } from './nft-pages/nft-transfer/nft-transfer.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrandVerifyComponent,
     BrandIndentityVerificationComponent,
     AccountFormComponent,
+    NftTransferComponent,
   ],
   imports: [
     CommonModule,

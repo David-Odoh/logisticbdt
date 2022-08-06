@@ -5,7 +5,7 @@ h2 {
 }
 
 .history-card {
-    margin-top: 4px;
+    margin-top: 14px;
     border: 1px solid #d6e0ea;
     box-shadow: 0 6px 18px 0 rgb(0 35 90 / 8%), 0 0 2px 0 rgb(0 35 90 / 6%);
     padding: 10px 0;
@@ -25,6 +25,18 @@ h2 {
     .card-info {
         width: 80%;
         .txn-count {
+            color: #ffffff;
+            background: #f71a3d;
+            padding: 1px 10px;
+            min-width: 10px;
+            min-height: 10px;
+            display: flex;
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            border-radius: 4px;
+        }
+        .minted-by {
             color: #989898;
         }
     
@@ -37,6 +49,19 @@ h2 {
             &.mine {
                 color: #E52F45;
                 background-color: #e52f4517;
+            }
+        }
+
+        .transfer-btn {
+            color: #000000;
+            background-color: #ffeb3b;
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-weight: bolder;
+            cursor: pointer;
+
+            &:hover, &:focus {
+               box-shadow: 0px 1px 2px #0000004d;
             }
         }
     }

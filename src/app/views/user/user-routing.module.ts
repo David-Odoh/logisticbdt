@@ -12,6 +12,7 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
 import { StoreFrontComponent } from './market-pages/store-front/store-front.component';
 import { NftCreateComponent } from './nft-pages/nft-create/nft-create.component';
 import { NftListComponent } from './nft-pages/nft-list/nft-list.component';
+import { NftTransferComponent } from './nft-pages/nft-transfer/nft-transfer.component';
 import { NftVerifyComponent } from './nft-pages/nft-verify/nft-verify.component';
 import { SearchHomeComponent } from './search-pages/search-home/search-home.component';
 
@@ -45,6 +46,7 @@ const routes: Routes = [
       { path: '**', redirectTo: 'fh', pathMatch: "full" },
       ]
     }, 
+  { path: "nft-transfer", component: NftTransferComponent}, 
   { path: "nft-list", component: NftListComponent}, 
   { path: "register-brand", component: BrandRegisterComponent}, 
   { path: "verify-brand", component: BrandVerifyComponent}, 

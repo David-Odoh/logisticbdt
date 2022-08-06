@@ -1,4 +1,6 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Dictionary } from 'src/app/shared/models/dictionary';
 import { UIStateService } from 'src/app/shared/services/ui-state.service';
@@ -14,7 +16,7 @@ export class NftVerifyComponent implements OnInit {
 
   terms_from_dic = new Dictionary().terms
 
-  constructor(private $ui: UIStateService) { }
+  constructor(private $ui: UIStateService, private router: Router) { }
 
   ngOnInit(): void {
     this.subscriptions.add(this.$ui.$mainAreaOpener.subscribe((mainAreaId: any) => {
@@ -33,6 +35,7 @@ export class NftVerifyComponent implements OnInit {
   }
 
   closeMainArea(e: any) {
-    this.openInMainArea = false
+    this.openInMainArea = false;
+    this.router.navigate(['/user/nft-create/fh']);
   }
 }
