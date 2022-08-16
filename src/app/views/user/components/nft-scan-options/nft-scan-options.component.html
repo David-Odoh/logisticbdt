@@ -15,10 +15,12 @@
                <button class="jx-t-uppercase" (click)="requestToOpenNFTCreate('QR Code')">QR Code</button>
                <button class="jx-t-uppercase" (click)="requestToOpenNFTCreate('NFC')">NFC</button>
             </div>
-            <span class="jx-t-uppercase jx-d-block jx-fs-15">Owner's Options</span>
-            <div class="button-list">
-                <button class="jx-t-uppercase" routerLink="/user/nft-list">View My NFTs</button>
-            </div>
+            <ng-container *ngIf="this.currentUrl.includes('verify')">
+                <span class="jx-t-uppercase jx-d-block jx-fs-15">Owner's Options</span>
+                <div class="button-list">
+                    <button class="jx-t-uppercase" routerLink="/user/nft-list">My Luxury NFTs</button>
+                </div>
+            </ng-container>
         </div>
      
     </div>
