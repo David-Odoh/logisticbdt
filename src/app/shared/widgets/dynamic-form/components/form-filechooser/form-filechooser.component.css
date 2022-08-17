@@ -34,9 +34,10 @@
 
 span.-upload-btn {
     background: var(--submit-btn-background-active);
+    background-color: #727272;
     color: #fff;
     padding: 12px 30px;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     font-family: "OS B";
     cursor: pointer;
 }

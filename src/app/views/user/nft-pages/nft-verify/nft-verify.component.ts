@@ -36,6 +36,6 @@ export class NftVerifyComponent implements OnInit {
 
   closeMainArea(e: any) {
     this.openInMainArea = false;
-    this.router.navigate(['/user/nft-create/fh']);
+    this.router.navigate(['/user/nft-verify/fh']);
   }
 }

@@ -18,7 +18,6 @@ import { GeneralService } from 'src/app/shared/widgets/dynamic-form/services/gen
 })
 export class NftHistoryComponent implements OnInit {
   subscriptions: Subscription = new Subscription();
-  viewMode: string = 'tab1';
   title: string = 'History';
   uploadedImageUrl: any = '';
   PID: any = '';
@@ -39,7 +38,6 @@ export class NftHistoryComponent implements OnInit {
     this.subscriptions.add(
       this.route.url.subscribe(u => {
         this.$ui.updateSecondaryRoute(u[0].path);
-        this.viewMode = 'tab1';
         this.title = 'Test';
       })
     );

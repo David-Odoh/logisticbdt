@@ -36,6 +36,10 @@ export class NftScanOptionsComponent implements OnInit {
     if (option === 'NFC') {
       if (this.currentUrl.includes('verify'))
         this.router.navigate(["/user/nft-verify/nfc"]);
+
+      else if (this.currentUrl.includes('transfer'))
+        this.router.navigate(["/user/nft-transfer/nfc"]);
+        
       else
         this.router.navigate(["/user/nft-create/nfc"]);
       this.$ui.updateSecondaryRoute('nfc');
@@ -44,6 +48,10 @@ export class NftScanOptionsComponent implements OnInit {
     else {
       if (this.currentUrl.includes('verify'))
         this.router.navigate(["/user/nft-verify/qr"]);
+
+      else if (this.currentUrl.includes('transfer'))
+        this.router.navigate(["/user/nft-transfer/qr"]);
+
       else
         this.router.navigate(["/user/nft-create/qr"]);
       this.$ui.updateSecondaryRoute('qr');

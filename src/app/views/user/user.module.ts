@@ -21,13 +21,15 @@ import { BrandMetadataComponent } from './components/brand-metadata/brand-metada
 import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
 import { NftNfcReaderComponent } from './components/nft-nfc-reader/nft-nfc-reader.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
-import { NftVerifyEntryComponent } from './components/nft-verify-entry/nft-verify-entry.component';
 import { NftHistoryComponent } from './components/nft-history/nft-history.component';
 import { BrandVerifyComponent } from './brand-pages/brand-verify/brand-verify.component';
 import { BrandIndentityVerificationComponent } from './components/brand-indentity-verification/brand-indentity-verification.component';
 import { AccountFormComponent } from './components/account-form/account-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NftTransferComponent } from './nft-pages/nft-transfer/nft-transfer.component';
+import { NftLastTransactionComponent } from './components/nft-last-transaction/nft-last-transaction.component';
+import { WebcamModule } from 'ngx-webcam';
+import { NftCameraComponent } from './components/nft-camera/nft-camera.component';
 
 
 @NgModule({
@@ -49,19 +51,21 @@ import { NftTransferComponent } from './nft-pages/nft-transfer/nft-transfer.comp
     ComingSoonComponent,
     NftNfcReaderComponent,
     SearchResultComponent,
-    NftVerifyEntryComponent,
     NftHistoryComponent,
     BrandVerifyComponent,
     BrandIndentityVerificationComponent,
     AccountFormComponent,
     NftTransferComponent,
+    NftLastTransactionComponent,
+    NftCameraComponent,
   ],
   imports: [
     CommonModule,
     UserRoutingModule,
     ZXingScannerModule,
     DynamicFormModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    WebcamModule
   ]
 })
 export class UserModule { }

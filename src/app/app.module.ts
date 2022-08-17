@@ -21,7 +21,7 @@ import { SharedModule } from './shared/shared.module';
     ToastrModule.forRoot(),
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

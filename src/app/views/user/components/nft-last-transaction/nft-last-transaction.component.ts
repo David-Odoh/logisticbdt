@@ -1,8 +1,8 @@
-import { AfterContentInit, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import Keyring from '@polkadot/keyring';
-import { stringToU8a, u8aToHex, u8aToString } from '@polkadot/util';
+import { u8aToHex } from '@polkadot/util';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Dictionary } from 'src/app/shared/models/dictionary';
@@ -12,92 +12,28 @@ import { NodeService } from 'src/app/shared/services/node.service';
 import { SecurityService } from 'src/app/shared/services/security.service';
 import { TransactionService } from 'src/app/shared/services/transaction.service';
 import { UIStateService } from 'src/app/shared/services/ui-state.service';
-import { DynamicFormComponent } from 'src/app/shared/widgets/dynamic-form/dynamic-form.component';
 import { FieldConfig } from 'src/app/shared/widgets/dynamic-form/models/field-config';
 import { GeneralService } from 'src/app/shared/widgets/dynamic-form/services/general.service';
 
 @Component({
-  selector: 'app-nft-metadata',
-  templateUrl: './nft-metadata.component.html',
-  styleUrls: ['./nft-metadata.component.scss']
+  selector: 'app-nft-last-transaction',
+  templateUrl: './nft-last-transaction.component.html',
+  styleUrls: ['./nft-last-transaction.component.scss']
 })
-export class NftMetadataComponent implements OnInit, AfterViewInit {
-  //@ts-ignore
-  @ViewChild(DynamicFormComponent) form1: DynamicFormComponent;
-  //@ts-ignore
-  @ViewChild(DynamicFormComponent) form2: DynamicFormComponent;
+export class NftLastTransactionComponent implements OnInit {
   subscriptions: Subscription = new Subscription();
   viewMode: string = 'tab1';
   title: string = 'Metadata';
   uploadedImageUrl: any = '';
   PID: any = '';
   productExist = false;
+  lastTransaction: any = null;
 
   terms = new Dictionary().terms;
 
   busy = false;
   float_style = true;
   accountPK: string | null = null; 
-
-  config1: FieldConfig[] = [
-    {
-      type: 'filechooser',
-      label: 'Upload Image *',
-      name: 'images',
-      valueType: 'image',
-      placeholder: 'Enter a email',
-      z_index: '6',
-      validation: [Validators.required]
-    },
-    {
-      type: 'button',
-      label: 'Upload Image & Proceed',
-      name: 'upload',
-    },
-  ];
-
-  config2: FieldConfig[] = [
-    {
-      type: 'input',
-      label: 'Product Label Name *',
-      name: 'product_label',
-      placeholder: 'Enter Label Name',
-      validation: [Validators.required]
-    },
-    {
-      type: 'input',
-      label: 'Product Name *',
-      name: 'product_name',
-      placeholder: 'Enter Product Name',
-      validation: [Validators.required]
-    },
-    {
-      type: 'input',
-      label: 'Product Color *',
-      name: 'product_color',
-      placeholder: 'Enter Color Name',
-      validation: [Validators.required]
-    },
-    {
-      type: 'input',
-      label: 'Product Brand *',
-      name: 'product_brand',
-      placeholder: 'Enter Brand Name',
-      validation: [Validators.required]
-    },
-    {
-      type: 'textarea',
-      label: 'Description *',
-      name: 'description',
-      placeholder: 'Enter Description',
-      validation: [Validators.required]
-    },
-    {
-      type: 'button',
-      label: 'Proceed',
-      name: 'submit',
-    },
-  ];
 
 
   constructor(
@@ -110,6 +46,7 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
     private $nft: NftService,
     private $ns: NodeService,
     private $security: SecurityService,
+    private $transact: TransactionService,
     ) {
     this.subscriptions.add(
       this.route.url.subscribe(u => {
@@ -131,11 +68,11 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
   }
   
   ngOnInit(): void {
-    this.uploadedImageUrl = localStorage.getItem('CID');
+    this.uploadedImageUrl = localStorage.getItem('TCID');
     this.PID = localStorage.getItem('PID');
 
     // Image already uploaded, switch view to tab2
-    if (this.uploadedImageUrl) this.viewMode = 'tab2'
+    if (this.PID) this.getProductHistory();
     console.log('PID', this.PID);
   }
 
@@ -144,15 +81,6 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
-  }
-
-  generateAlias(name: any) {
-    return name.toLowerCase().split(' ').join('_');
-  }
-
-  submitAll() {
-    console.log('trying')
-    this.$general.triggerImpromptuSubmit([]);
   }
 
   async signMetadata(metadata: any) {
@@ -216,7 +144,7 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
               this.toastr.success('Added Successfully', ``);
               this.uploadedImageUrl = temp.cid; 
 
-              localStorage.setItem('CID',  this.uploadedImageUrl);            
+              localStorage.setItem('TCID',  this.uploadedImageUrl);            
               setTimeout(() => this.viewMode = 'tab2', 100);
             }
             this.busy = false;
@@ -273,49 +201,41 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
   }
 
   async submit3() {
-    if (this.preparedData) {
-      let signedData = await this.signMetadata(this.preparedData);
-        if (signedData != null) {
+    // if (this.preparedData) {
+    //   let signedData = await this.signMetadata(this.preparedData);
+    //     if (signedData != null) {
 
-          console.log('Final Result: ', signedData)
+    //       console.log('Final Result: ', signedData)
 
-            this.busy = true;
+    //         this.busy = true;
     
-            this.subscriptions.add(
-              this.$nft.saveNFT(signedData).subscribe(res => {
-                let temp: any = res;
-                if (temp) {
-                  this.toastr.success('Created Successfully', ``);
+    //         this.subscriptions.add(
+    //           this.$nft.saveNFT(signedData).subscribe(res => {
+    //             let temp: any = res;
+    //             if (temp) {
+    //               this.toastr.success('Created Successfully', ``);
       
-                  localStorage.removeItem('CID');            
-                  localStorage.removeItem('PID');  
-                  this.preparedData = null;          
-                  setTimeout(() => this.viewMode = 'tab4', 100);
-                }
-                this.busy = false;
-                console.log('NFT', res)
-              }, (err) => {
-                this.busy = false;
+    //               localStorage.removeItem('TCID');            
+    //               localStorage.removeItem('PID');  
+    //               this.preparedData = null;          
+    //               setTimeout(() => this.viewMode = 'tab4', 100);
+    //             }
+    //             this.busy = false;
+    //             console.log('NFT', res)
+    //           }, (err) => {
+    //             this.busy = false;
 
-                this.toastr.error('Failed to Create', 'Oops! Something went wrong. Try again');
-                console.log(err)
-                console.log(err.status)
-              })
-          );
-        } else this.toastr.success("Account Not Found", "No user account was selected!");    
-    }
-  }
-
-  deleteImage() {
-    console.log('Deleting image')
-  }
-
-  resetForm () {
-    this.form2.form.reset();
+    //             this.toastr.error('Failed to Create', 'Oops! Something went wrong. Try again');
+    //             console.log(err)
+    //             console.log(err.status)
+    //           })
+    //       );
+    //     } else this.toastr.success("Account Not Found", "No user account was selected!");    
+    // }
   }
 
   requestToOpenNFTCreate(option: string) {
-    this.router.navigate(["/user/nft-create/qr"]);
+    this.router.navigate(["/user/nft-transfer/qr"]);
 
     // Display Info in Main Area
     this.$ui.updateNFTView(`Scan ${option}`);
@@ -331,6 +251,40 @@ export class NftMetadataComponent implements OnInit, AfterViewInit {
   isBusy($evt: any) {
     if ($evt) this.busy = true;
     else this.busy = false;
+  }
+
+  getProductHistory() {
+    if (this.PID) {
+      this.busy = true;
+
+      this.subscriptions.add(
+        this.$transact.getTransactionsByPID(this.PID).subscribe( res => {
+          console.log(res);
+          this.busy = false;
+          
+          if (res)
+          if (res['data'] != false) {
+            this.lastTransaction = res['data'][res['data'].length - 1];
+            console.log('this.lastTransaction', this.lastTransaction);
+            }
+        }, (err) => {
+          this.busy = false;
+          this.toastr.error('Oops! Something went wrong. Try again', 'Data couldn\'t load');
+          console.log(err)
+        })
+      )
+    } else this.toastr.success("No Product ID Found", "Scan item again");
+  }
+
+  capturedImage = '';
+  captureImage(evt: any) {
+    if (evt) {
+     this.capturedImage = evt;
+    }
+  }
+
+  retakeShot() {
+    this.capturedImage = '';
   }
 }
 

@@ -1,0 +1,11 @@
+::ng-deep .webcam-wrapper video {
+    width: 100% !important;
+    height: auto !important;
+}
+
+.capture-btn {
+    display: block;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+}

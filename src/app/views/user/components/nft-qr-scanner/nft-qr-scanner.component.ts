@@ -69,7 +69,7 @@ export class NftQrScannerComponent implements OnInit, OnDestroy {
     }
 }
 
-  processWithMintFlow() {
+  proceedWithMintFlow() {
     if (this.qrResultString) {
       this.$nft.updateQrCode(this.qrResultString);
 
@@ -80,6 +80,10 @@ export class NftQrScannerComponent implements OnInit, OnDestroy {
 
       if (this.currentUrl.includes('verify'))
         this.router.navigate(['/user/nft-verify/history']);
+
+      else if (this.currentUrl.includes('transfer'))
+        this.router.navigate(['/user/nft-transfer/last']);
+
       else
         this.router.navigate(['/user/nft-create/metadata']);
     }

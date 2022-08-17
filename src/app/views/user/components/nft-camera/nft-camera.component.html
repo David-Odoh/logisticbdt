@@ -1,0 +1,17 @@
+<div class="">
+    <div class="row">
+        <div class="cam-wrap jx-p-relative">
+            <webcam 
+                [trigger]="triggerObservable" 
+                (imageCapture)="handleImage($event)"></webcam>
+              
+            <button class="btn btn-success jx-p-absolute capture-btn" (click)="triggerSnapshot();">Take a Snapshot</button>
+        </div>
+        <!-- <div class="">
+  
+            <div id="results">Your captured image will appear here...</div>
+            <img [src]="captureImage" height="300px">
+  
+        </div> -->
+    </div>
+</div>

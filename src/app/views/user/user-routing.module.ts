@@ -5,6 +5,7 @@ import { BrandRegisterComponent } from './brand-pages/brand-register/brand-regis
 import { BrandVerifyComponent } from './brand-pages/brand-verify/brand-verify.component';
 import { NftFlowHolderComponent } from './components/nft-flow-holder/nft-flow-holder.component';
 import { NftHistoryComponent } from './components/nft-history/nft-history.component';
+import { NftLastTransactionComponent } from './components/nft-last-transaction/nft-last-transaction.component';
 import { NftMetadataComponent } from './components/nft-metadata/nft-metadata.component';
 import { NftNfcReaderComponent } from './components/nft-nfc-reader/nft-nfc-reader.component';
 import { NftQrScannerComponent } from './components/nft-qr-scanner/nft-qr-scanner.component';
@@ -41,6 +42,18 @@ const routes: Routes = [
         { path: '', redirectTo: 'fh', pathMatch: "full" },
       { path: 'fh', component: NftFlowHolderComponent },
       { path: 'history', component: NftHistoryComponent },
+      { path: 'qr', component: NftQrScannerComponent },
+      { path: 'nfc', component: NftNfcReaderComponent },
+      { path: '**', redirectTo: 'fh', pathMatch: "full" },
+      ]
+    }, 
+  {
+      path: "nft-transfer",
+      component: NftTransferComponent,
+      children: [
+        { path: '', redirectTo: 'fh', pathMatch: "full" },
+      { path: 'fh', component: NftFlowHolderComponent },
+      { path: 'last', component: NftLastTransactionComponent },
       { path: 'qr', component: NftQrScannerComponent },
       { path: 'nfc', component: NftNfcReaderComponent },
       { path: '**', redirectTo: 'fh', pathMatch: "full" },
